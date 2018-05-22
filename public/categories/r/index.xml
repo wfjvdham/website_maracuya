@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R on Maracuya IT</title>
+    <title>R on Minimo</title>
     <link>/categories/r/</link>
-    <description>Recent content in R on Maracuya IT</description>
+    <description>Recent content in R on Minimo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 21 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Colombian Cooking</title>
-      <link>/post/colombian-cooking/</link>
-      <pubDate>Mon, 21 May 2018 00:00:00 +0000</pubDate>
+      <title>Hello R Markdown</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>/post/colombian-cooking/</guid>
-      <description>Last December I had the opportunity to work with my friends from randommonkey. We made special about the Colombian kitchen. Part of this special was a Shiny application that can be used to search trough the Colombian recipes. Names, ingredient, region, complexity and the time required can be used to find your favorite one. After finding a recipe you can download the description.
-So if you are interested in making some Mojarras fritas (and you know a little Spanish because the page is completely in Spanish) look here.</description>
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
   </channel>
