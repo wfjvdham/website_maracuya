@@ -5,22 +5,22 @@ date: '2018-05-22'
 slug: about-maracuya-it
 ---
 
-This is a maracuya... 
+This is a maracuya...
 
 ![...my favorite Colombian fruit.](/./2018-05-22-about-maracuya-it_files/1321324244_maracuya.jpg){width=20%}
 
-But Maracuya IT is my company for giving classes about R. I offer four cources at the moment:
+But Maracuya IT is my company for giving classes about R. I offer four courses at the moment:
 
-1. R - Basics, for people who have zero or little experience with R. The basic about how to explore data, create graphics, do some simple statiscical models and present the results is explained. 
-1. R - Machine Learning, this course focusses on using more complex statistical models in R. Randomforrest, clustering and cross validation are explained.
+1. R - Basics, for people who have zero or little experience with R. The basic about how to explore data, create graphics, do some simple statistical models and present the results is explained.
+1. R - Machine Learning, this course focuses on using more complex statistical models in R. Random forrest, clustering and cross validation are explained.
 1. R - Big Data, here I explain how to connect R to a cluster and do computations on large amounts of data using `sparklyr`.
 1. R - Shiny, explains how to make interactive website and dashboards with R using `shiny`.
 
-This website will contain examples of what you can do with the knowledge optained in these courses.
+This website will contain examples of what you can do with the knowledge obtained in these courses.
 
 For more info you can mail me at `wfjvdham@gmail.com`
 
-Or subscribe to the newletter
+Or subscribe to the newsletter
 
 <!--html_preserve-->
 <form name="contact" method="POST" netlify>
@@ -35,5 +35,3 @@ Or subscribe to the newletter
   </p>
 </form>
 <!--/html_preserve-->
-
-
