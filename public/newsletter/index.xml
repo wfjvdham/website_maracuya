@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Newsletters on </title>
+    <link>/newsletter/</link>
+    <description>Recent content in Newsletters on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 24 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/newsletter/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Subscribe</title>
+      <link>/newsletter/subscribe/</link>
+      <pubDate>Thu, 24 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/newsletter/subscribe/</guid>
+      <description>If you want to receives updates on our projects you can subscribe to our newsletter here.
+ Your Name:   Your Email:   Send  </description>
+    </item>
+    
+  </channel>
+</rss>
