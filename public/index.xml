@@ -30,7 +30,7 @@ So if you are interested in making some Mojarras fritas (and you know a little S
       <description>This is a maracuya…
 …my favorite Colombian fruit.
  But Maracuya IT is my company for giving classes about R. I offer four courses at the moment:
-R - Basics, for people who have zero or little experience with R. The basic about how to explore data, create graphics, do some simple statistical models and present the results is explained. R - Machine Learning, this course focuses on using more complex statistical models in R.</description>
+R - Basics, for people who have zero or little experience with R. The basic about how to explore data, create graphics, do some simple statistical models and present the results is explained. The tidyverse packages are used for this. R - Machine Learning, this course focuses on using more complex statistical models in R.</description>
     </item>
     
   </channel>
