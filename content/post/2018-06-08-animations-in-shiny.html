@@ -1,0 +1,54 @@
+---
+title: Animations in Shiny using TweenLite
+author: Wim van der Ham
+date: '2018-06-08'
+slug: animations-in-shiny
+categories:
+  - R
+  - shiny
+tags:
+  - games
+  - animation
+---
+
+
+
+<p>From a colleague I heard about <a href="https://greensock.com/tweenlite">TweenLite</a>, a JavaScript library that can be used to animate objects on your website. You can move elements around by controlling their speed and position. I wanted to see how well this would work in a Shiny application so I experimented a little bit with that.</p>
+<p>The result is an application that can keep track of the score of the <a href="https://en.wikipedia.org/wiki/The_Weakest_Link_(UK_game_show)">the weakest link</a>, a TV game show from more than 10 years ago. To see the app immediately go <a href="https://maracuya.shinyapps.io/theWeakestLink/">here</a>. The code can be found <a href="https://github.com/wfjvdham/theWeakestLink">here</a> and in the rest of this post I will explain what I did.</p>
+<div id="including-tweenlite" class="section level2">
+<h2>Including TweenLite</h2>
+<p>If you want to use TweenLite you need to include the library in you Shiny app. This can be done using the following code on top of your UI element:</p>
+<pre class="r"><code>tags$head(
+  tags$script(src = &quot;https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js&quot;),
+  tags$script(src = &quot;script.js&quot;)
+)</code></pre>
+<p>Here also the <code>script.js</code> file is included which contains the code for controlling the animation.</p>
+</div>
+<div id="the-script.js-file" class="section level2">
+<h2>The script.js file</h2>
+<p>In the <a href="https://github.com/wfjvdham/theWeakestLink/blob/master/theWeakestLink/www/script.js"><code>scripts.js</code></a> file the ‘Tweens’ are initialized. A ‘Tween’ is an animation object that changes some properties, could be position or color, of a HTML object on your page. I want to change the background color and the position so I use the following options for my tween:</p>
+<p><code>{top:&quot;50px&quot;, backgroundColor: &quot;#99565D&quot;}</code></p>
+<p>The other arguments a tween need are the object for which it needs to change the options and the time over which the options are changed. In the end the creation of the Tween looks like this:</p>
+<p><code>var tween = TweenLite.to(score, 2, {top:&quot;50px&quot;, backgroundColor: &quot;#99565D&quot;})</code></p>
+<p>When you have a tween you can control the animation by using the functions <code>play()</code>, <code>pause()</code> or <code>restart()</code>. These controls I connect to the buttons I have on the page.</p>
+<div id="play-next-tween" class="section level3">
+<h3>Play Next Tween</h3>
+<p>The correct button increases the total number of correct answers given in a row by 1. And it starts the tween of the next score circle.</p>
+<pre class="javascript"><code>correct_button.onclick = function() {
+  nCorrect++
+  tweens[8 - nCorrect].play()
+}</code></pre>
+</div>
+<div id="reset-tweens" class="section level3">
+<h3>Reset Tweens</h3>
+<p>When a wrong answer is given or a player banks the money the tweens needs to be restarted. To prevent the Tween from starting immediately the <code>pause()</code> function is called immediately after.</p>
+<pre class="javascript"><code>var reset_tweens = function() {
+  nCorrect = 0
+  Array.prototype.forEach.call(tweens, function(tween) {
+    tween.restart()
+    tween.pause()
+  })
+}</code></pre>
+<p>And thats it! You only need to include the TweenLite library and your <code>JavaScript</code> file at the beginning of your Shiny app. The rest of the logic of your animations you can program in <code>JavaScript</code></p>
+</div>
+</div>

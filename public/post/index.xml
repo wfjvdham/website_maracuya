@@ -6,10 +6,20 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 23 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Animations in Shiny using TweenLite</title>
+      <link>/post/animations-in-shiny/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/animations-in-shiny/</guid>
+      <description>From a colleague I heard about TweenLite, a JavaScript library that can be used to animate objects on your website. You can move elements around by controlling their speed and position. I wanted to see how well this would work in a Shiny application so I experimented a little bit with that.
+The result is an application that can keep track of the score of the the weakest link, a TV game show from more than 10 years ago.</description>
+    </item>
     
     <item>
       <title>Colombian Cooking</title>
