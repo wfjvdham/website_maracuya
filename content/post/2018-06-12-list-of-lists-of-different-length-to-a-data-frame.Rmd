@@ -1,0 +1,72 @@
+---
+title: List of lists of different length to a data frame
+author: Wim van der Ham
+date: '2018-06-12'
+categories:
+  - R
+  - shiny
+tags:
+  - volleybal
+  - web scraping
+slug: list-of-lists-of-different-length-to-a-data-frame
+---
+
+When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example [here](https://github.com/wfjvdham/wildcard_ek). It is a shiny application that reads data from the [eredivisie beach site](https://www.eredivisiebeach.nl/) and uses it to culculate the current standings for the wildcards for the EC.
+
+## rvest
+
+For the scraping of the data I use the [`rvest`](https://github.com/hadley/rvest) package. It has a function `read_html()` to get the html from a specific page and the funciton `html_nodes()` to get the content of some specific nodes on the page. The eredivisiebeach uses differen urls for different tournaments so I use the `map()` function to loop over the different urls. The next example shows how I collected the names of the teams. In a simular way I collected the points and the ranking.
+
+```{r, include=FALSE}
+library(tidyverse)
+library(rvest)
+library(knitr)
+```
+
+```{r}
+toernooi_plaatsen <- c("vlissingen", "zutphen", "arnhem", "utrecht", "leeuwarden", 
+                       "eindhoven", "heerenveen", "groningen")
+
+data <- toernooi_plaatsen %>%
+    map(~paste0("https://www.eredivisiebeach.nl/tour-info/", .x)) %>%
+    map(read_html)
+  
+team_names <- data %>%
+  map(html_nodes, ".ranking_team_name") %>% 
+  map(html_text)
+c(length(team_names[[1]]), length(team_names[[3]]))
+```
+
+The result is a list of lists of different lengths.
+
+## unlist()
+
+The `unlist()` function is very important here. It takes the second layer of lists and put them next to eachother in one big list. This big list I can put in a column of a data frame by using the `tibble()` funciton.
+
+```{r}
+df <- tibble(
+  team_names = team_names %>%
+    unlist()
+)
+df %>%
+  slice(1:6) %>%
+  kable()
+```
+
+For me this was wat I needed. It can be that you want to remember from which sublist the data came. In that case you have to set the names of the list and unlist the names as well.
+
+```{r}
+names(team_names) <- toernooi_plaatsen
+df <- tibble(
+  team_names = team_names %>%
+    unlist(),
+  tournaments = team_names %>%
+    unlist() %>%
+    names()
+)
+df %>%
+  slice(1:6) %>%
+  kable()
+```
+
+The names are than combined with an index in an extra column.

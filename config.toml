@@ -31,12 +31,22 @@ googleAnalytics = "UA-119902709-1"
 
 ## Main Menu
 [[menu.main]]
-    name = "Posts"
+    name = "About"
+    identifier = "about"
     weight = 100
+    url = "/about/"
+[[menu.main]]
+    name = "Posts"
+    weight = 200
     identifier = "posts"
     url = "/post/"
 [[menu.main]]
-    name = "About"
-    identifier = "about"
-    weight = 200
-    url = "/about/"
+    name = "Tags"
+    weight = 300
+    identifier = "tags"
+    url = "/tags/"
+[[menu.main]]
+    name = "Categories"
+    weight = 400
+    identifier = "categories"
+    url = "/categories/"

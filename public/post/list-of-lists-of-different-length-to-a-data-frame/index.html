@@ -10,8 +10,8 @@
     
     <meta name="generator" content="Hugo 0.40.3" />
     
-    <title>About Maracuya IT &middot; </title>
-    <meta content="About Maracuya IT - " property="og:title">
+    <title>List of lists of different length to a data frame &middot; </title>
+    <meta content="List of lists of different length to a data frame - " property="og:title">
     <meta content=" - " property="og:description">
     <!-- CSS -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i|Roboto+Mono:300,300i,400,400i" rel="stylesheet">
@@ -99,50 +99,149 @@
 
         <div class="content container">
             <div class="post">
-  <h1>About Maracuya IT</h1>
+  <h1>List of lists of different length to a data frame</h1>
   
   <div class="col-sm-12 col-md-12">
     <span class="text-left post-date meta">
             
        
-        <i class="fas fa-calendar-alt"></i> May 22, 2018
+        <i class="fas fa-calendar-alt"></i> Jun 12, 2018
       
       
+        
+        
+            in
+            
+            
+                <a class="meta" href="/categories/r">R</a>
+                ,
+            
+                <a class="meta" href="/categories/shiny">SHINY</a>
+                
+            
+        
+      
+      
+      
+        
+        
+            <br/>
+             <i class="fas fa-tags"></i>
+            
+            <a class="meta" href="/tags/volleybal">volleybal</a> 
+        
+            <a class="meta" href="/tags/web-scraping">web scraping</a>
+        
       
       
       <br/>
-      <i class="fas fa-clock"></i> 1 min read 
+      <i class="fas fa-clock"></i> 2 min read 
       </span>  
   </div>    
   
-  <p>This is a maracuya…</p>
-<div class="figure">
-<img src="/./2018-05-22-about-maracuya-it_files/1321324244_maracuya.jpg" alt="…my favorite Colombian fruit." style="width:20.0%" />
-<p class="caption">…my favorite Colombian fruit.</p>
+  <p>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example <a href="https://github.com/wfjvdham/wildcard_ek">here</a>. It is a shiny application that reads data from the <a href="https://www.eredivisiebeach.nl/">eredivisie beach site</a> and uses it to culculate the current standings for the wildcards for the EC.</p>
+<div id="rvest" class="section level2">
+<h2>rvest</h2>
+<p>For the scraping of the data I use the <a href="https://github.com/hadley/rvest"><code>rvest</code></a> package. It has a function <code>read_html()</code> to get the html from a specific page and the funciton <code>html_nodes()</code> to get the content of some specific nodes on the page. The eredivisiebeach uses differen urls for different tournaments so I use the <code>map()</code> function to loop over the different urls. The next example shows how I collected the names of the teams. In a simular way I collected the points and the ranking.</p>
+<pre class="r"><code>toernooi_plaatsen &lt;- c(&quot;vlissingen&quot;, &quot;zutphen&quot;, &quot;arnhem&quot;, &quot;utrecht&quot;, &quot;leeuwarden&quot;, 
+                       &quot;eindhoven&quot;, &quot;heerenveen&quot;, &quot;groningen&quot;)
+
+data &lt;- toernooi_plaatsen %&gt;%
+    map(~paste0(&quot;https://www.eredivisiebeach.nl/tour-info/&quot;, .x)) %&gt;%
+    map(read_html)
+  
+team_names &lt;- data %&gt;%
+  map(html_nodes, &quot;.ranking_team_name&quot;) %&gt;% 
+  map(html_text)
+c(length(team_names[[1]]), length(team_names[[3]]))</code></pre>
+<pre><code>## [1] 24 25</code></pre>
+<p>The result is a list of lists of different lengths.</p>
 </div>
-<p>But Maracuya IT is my company for giving classes about R. I offer four courses at the moment:</p>
-<ol style="list-style-type: decimal">
-<li><strong>R - Basics</strong>, for people who have zero or little experience with R. The basic about how to explore data, create graphics, do some simple statistical models and present the results is explained. The <code>tidyverse</code> packages are used for this.</li>
-<li><strong>R - Machine Learning</strong>, this course focuses on using more complex statistical models in R. Random forrest, clustering and cross validation are explained.</li>
-<li><strong>R - Big Data</strong>, here I explain how to connect R to a cluster and do computations on large amounts of data using <code>sparklyr</code>.</li>
-<li><strong>R - Shiny</strong>, explains how to make interactive website and dashboards with R using <code>shiny</code>.</li>
-</ol>
-<p>This website will contain examples of what you can do with the knowledge obtained in these courses.</p>
-<p>For more info you can mail me at <code>wfjvdham@gmail.com</code></p>
-<p>Or subscribe to the newsletter</p>
-
-<form name="contact" method="POST" netlify>
-  <p>
-    <label>Your Name: <input type="text" name="name" /></label>
-  </p>
-  <p>
-    <label>Your Email: <input type="email" name="email" /></label>
-  </p>
-  <p>
-    <button type="submit">Send</button>
-  </p>
-</form>
-
+<div id="unlist" class="section level2">
+<h2>unlist()</h2>
+<p>The <code>unlist()</code> function is very important here. It takes the second layer of lists and put them next to eachother in one big list. This big list I can put in a column of a data frame by using the <code>tibble()</code> funciton.</p>
+<pre class="r"><code>df &lt;- tibble(
+  team_names = team_names %&gt;%
+    unlist()
+)
+df %&gt;%
+  slice(1:6) %&gt;%
+  kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">team_names</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sophie van Gestel / Marloes Wesselink</td>
+</tr>
+<tr class="even">
+<td align="left">Quirine Oosterveld / Mered de Vries</td>
+</tr>
+<tr class="odd">
+<td align="left">Sarah van Esch / Britt den Haan</td>
+</tr>
+<tr class="even">
+<td align="left">Annemieke Driessen / Ilke Meertens</td>
+</tr>
+<tr class="odd">
+<td align="left">Mexime van Driel / Flore Gravesteijn</td>
+</tr>
+<tr class="even">
+<td align="left">Hiske van Duinen / Lauri Luijken</td>
+</tr>
+</tbody>
+</table>
+<p>For me this was wat I needed. It can be that you want to remember from which sublist the data came. In that case you have to set the names of the list and unlist the names as well.</p>
+<pre class="r"><code>names(team_names) &lt;- toernooi_plaatsen
+df &lt;- tibble(
+  team_names = team_names %&gt;%
+    unlist(),
+  tournaments = team_names %&gt;%
+    unlist() %&gt;%
+    names()
+)
+df %&gt;%
+  slice(1:6) %&gt;%
+  kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">team_names</th>
+<th align="left">tournaments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Sophie van Gestel / Marloes Wesselink</td>
+<td align="left">vlissingen1</td>
+</tr>
+<tr class="even">
+<td align="left">Quirine Oosterveld / Mered de Vries</td>
+<td align="left">vlissingen2</td>
+</tr>
+<tr class="odd">
+<td align="left">Sarah van Esch / Britt den Haan</td>
+<td align="left">vlissingen3</td>
+</tr>
+<tr class="even">
+<td align="left">Annemieke Driessen / Ilke Meertens</td>
+<td align="left">vlissingen4</td>
+</tr>
+<tr class="odd">
+<td align="left">Mexime van Driel / Flore Gravesteijn</td>
+<td align="left">vlissingen5</td>
+</tr>
+<tr class="even">
+<td align="left">Hiske van Duinen / Lauri Luijken</td>
+<td align="left">vlissingen6</td>
+</tr>
+</tbody>
+</table>
+<p>The names are than combined with an index in an extra column.</p>
+</div>
 
 </div>
             <div class="footer">

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Volleybal on </title>
+    <link>/tags/volleybal/</link>
+    <description>Recent content in Volleybal on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 12 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/volleybal/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>List of lists of different length to a data frame</title>
+      <link>/post/list-of-lists-of-different-length-to-a-data-frame/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/list-of-lists-of-different-length-to-a-data-frame/</guid>
+      <description>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example here. It is a shiny application that reads data from the eredivisie beach site and uses it to culculate the current standings for the wildcards for the EC.</description>
+    </item>
+    
+  </channel>
+</rss>

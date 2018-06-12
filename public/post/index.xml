@@ -6,10 +6,19 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>List of lists of different length to a data frame</title>
+      <link>/post/list-of-lists-of-different-length-to-a-data-frame/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/list-of-lists-of-different-length-to-a-data-frame/</guid>
+      <description>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example here. It is a shiny application that reads data from the eredivisie beach site and uses it to culculate the current standings for the wildcards for the EC.</description>
+    </item>
     
     <item>
       <title>Animations in Shiny using TweenLite</title>
