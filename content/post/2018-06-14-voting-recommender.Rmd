@@ -1,0 +1,50 @@
+---
+title: Voting Recommender
+author: Wim van der Ham
+date: '2018-06-14'
+slug: voting-recommender
+categories:
+  - R
+  - shiny
+tags:
+  - randommonkey
+  - voting
+  - recommender
+---
+
+In the Netherlands we have the [StemWijzer](https://stemwijzer.nl/) a tool that calculates for which person to vote depending on your position on some statements. In Colombia they did not have such a tool yet. So I decided to make a [template application](https://maracuya.shinyapps.io/recommender/) which can work for any country. The only thing you need is a list of statements where you can agree with or not. And a list of persons of which you know their positions on those statements. The code can be found [here](https://github.com/wfjvdham/congreso-recomendador)
+
+## Data
+
+The data required for this app needs to be formatted in a specific way. The part that can be edited by the user has 4 vectors.
+
+1. The names of the persons where you want to compare the user with.
+1. The statements where the user need to give their opinion about.
+1. The themes to which these statements belong.
+1. The positions on the different statements per person ranging from -2 till +2. Where -2 means completely disagree, 0 neatral and +2 completely agree. The length of this vector should be the length of the persons times the length of the statements so every person has a position for very statement.
+
+```{r, eval=FALSE}
+PERSONS <- c( "Andres", "Diego", "Camilo")
+QUESTIONS <- c("What is your position on question 1?",
+               "What is your position on question 2?",
+               "What is your position on question 3?")
+THEMES <- c("thema_1", "thema_2", "thema_2")
+POSITIONS <- c(2, -2, 1, -1, 0, 2, -1, -1, 2)
+```
+
+## User Input
+
+Based on this data the app is generated. The user has to give two types of input to make a recommendation.
+
+1. His position on all the statements.
+1. The themes that he thinks are extra important
+
+The questions that belong to the themes that are important according to the user have extra weight in the calculation.
+
+## Results
+
+Two types of results are given. A table with scores and the names of the persons. The score expresses the distance you have with an opinion of a person. Low scores means low distance and probably a good match. Using the `cmdscale()` function a plot is made that graphically shows the distance with the different persons. `cmdscale()` calculates the principal-components and takes the first two as axis of the plot. The position of the persons in the database and the user are then plotted as well.
+
+## Enjoy!
+
+The interface is very bare at the moment but the functionality is there. If you have the data you can use this app to make a recommender for any election or any other problem where you want to compare opinions.

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" class="wf-firasans-n4-active wf-active">
+	<head>
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Enable responsiveness on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    
+    
+    <meta name="generator" content="Hugo 0.40.3" />
+    
+    <title>Voting Recommender &middot; </title>
+    <meta content="Voting Recommender - " property="og:title">
+    <meta content=" - " property="og:description">
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i|Roboto+Mono:300,300i,400,400i" rel="stylesheet">
+    <link rel="stylesheet" href="/css/print.css" media="print">
+    <link rel="stylesheet" href="/css/poole.css">
+    <link rel="stylesheet" href="/css/hyde.css">
+    <!-- Font-Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <!-- highlight.js-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <!-- Customised CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.png">
+    
+
+	</head>
+    <body>
+        <div class="sidebar">
+	<div class="container text-center sidebar-sticky">
+		<div class="sidebar-about text-center">
+			<a href="/"><h1 class="brand"></h1></a>
+			 <img src="/img/logo.png" alt="Author Image" class="img-circle headshot center"> 
+			<p class="lead">
+				 R and statistics 
+			</p>
+		</div>
+		
+<div>
+	<ul class="sidebar-nav">
+		
+		
+				<li>
+					<a href="/about/"> <span>About</span></a>
+				</li>
+				<li>
+					<a href="/post/"> <span>Posts</span></a>
+				</li>
+				<li>
+					<a href="/tags/"> <span>Tags</span></a>
+				</li>
+				<li>
+					<a href="/categories/"> <span>Categories</span></a>
+				</li>
+		</li>
+	</ul>
+</div>
+
+        <p>
+		<section class="row text-center">
+	
+	<a href="https://twitter.com/https://twitter.com/wim_vanderham"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	&nbsp;<a href="https://github.com/https://github.com/wfjvdham"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	&nbsp;<a href="https://linkedin.com/in/https://www.linkedin.com/in/wim-van-der-ham-8b6a5b44/"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a>
+	
+	
+	
+	
+	
+	&nbsp;<a href="mailto:wfjvdham@gmail.com"><i class="fas fa-at fa-lg" aria-hidden="true"></i></a>
+	
+</section>
+
+        </p>
+		<p class="copyright">&copy; 2018 Wim van der Ham.
+        <a href="https://creativecommons.org/licenses/by/4.0">Some Rights Reserved</a>.<br/>Built with <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
+        </p>
+	</div>
+	<div>
+	</div>
+</div>
+
+        <div class="content container">
+            <div class="post">
+  <h1>Voting Recommender</h1>
+  
+  <div class="col-sm-12 col-md-12">
+    <span class="text-left post-date meta">
+            
+       
+        <i class="fas fa-calendar-alt"></i> Jun 14, 2018
+      
+      
+        
+        
+            in
+            
+            
+                <a class="meta" href="/categories/r">R</a>
+                ,
+            
+                <a class="meta" href="/categories/shiny">SHINY</a>
+                
+            
+        
+      
+      
+      
+        
+        
+            <br/>
+             <i class="fas fa-tags"></i>
+            
+            <a class="meta" href="/tags/randommonkey">randommonkey</a> 
+        
+            <a class="meta" href="/tags/recommender">recommender</a> 
+        
+            <a class="meta" href="/tags/voting">voting</a>
+        
+      
+      
+      <br/>
+      <i class="fas fa-clock"></i> 2 min read 
+      </span>  
+  </div>    
+  
+  <p>In the Netherlands we have the <a href="https://stemwijzer.nl/">StemWijzer</a> a tool that calculates for which person to vote depending on your position on some statements. In Colombia they did not have such a tool yet. So I decided to make a <a href="https://maracuya.shinyapps.io/recommender/">template application</a> which can work for any country. The only thing you need is a list of statements where you can agree with or not. And a list of persons of which you know their positions on those statements. The code can be found <a href="https://github.com/wfjvdham/congreso-recomendador">here</a></p>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The data required for this app needs to be formatted in a specific way. The part that can be edited by the user has 4 vectors.</p>
+<ol style="list-style-type: decimal">
+<li>The names of the persons where you want to compare the user with.</li>
+<li>The statements where the user need to give their opinion about.</li>
+<li>The themes to which these statements belong.</li>
+<li>The positions on the different statements per person ranging from -2 till +2. Where -2 means completely disagree, 0 neatral and +2 completely agree. The length of this vector should be the length of the persons times the length of the statements so every person has a position for very statement.</li>
+</ol>
+<pre class="r"><code>PERSONS &lt;- c( &quot;Andres&quot;, &quot;Diego&quot;, &quot;Camilo&quot;)
+QUESTIONS &lt;- c(&quot;What is your position on question 1?&quot;,
+               &quot;What is your position on question 2?&quot;,
+               &quot;What is your position on question 3?&quot;)
+THEMES &lt;- c(&quot;thema_1&quot;, &quot;thema_2&quot;, &quot;thema_2&quot;)
+POSITIONS &lt;- c(2, -2, 1, -1, 0, 2, -1, -1, 2)</code></pre>
+</div>
+<div id="user-input" class="section level2">
+<h2>User Input</h2>
+<p>Based on this data the app is generated. The user has to give two types of input to make a recommendation.</p>
+<ol style="list-style-type: decimal">
+<li>His position on all the statements.</li>
+<li>The themes that he thinks are extra important</li>
+</ol>
+<p>The questions that belong to the themes that are important according to the user have extra weight in the calculation.</p>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<p>Two types of results are given. A table with scores and the names of the persons. The score expresses the distance you have with an opinion of a person. Low scores means low distance and probably a good match. Using the <code>cmdscale()</code> function a plot is made that graphically shows the distance with the different persons. <code>cmdscale()</code> calculates the principal-components and takes the first two as axis of the plot. The position of the persons in the database and the user are then plotted as well.</p>
+</div>
+<div id="enjoy" class="section level2">
+<h2>Enjoy!</h2>
+<p>The interface is very bare at the moment but the functionality is there. If you have the data you can use this app to make a recommender for any election or any other problem where you want to compare opinions.</p>
+</div>
+
+</div>
+            <div class="footer">
+                <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+<script type="text/javascript">
+    hljs.configure({languages: []});
+    hljs.initHighlightingOnLoad();
+</script>
+
+
+        <h2>Comments</h2>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+      (function () {
+            
+            
+            
+            if (location.hostname === "localhost" || 
+            	location.hostname === "127.0.0.1" || 
+            	location.hostname === "") {
+                return;
+			}
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'maracuya-1';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(
+                  dsq);
+      })();
+</script>
+
+<noscript>
+	Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      
+
+            </div>
+        </div>
+        
+        
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-119902709-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+        
+    </body>
+</html>

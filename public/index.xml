@@ -6,10 +6,19 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 12 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Voting Recommender</title>
+      <link>/post/voting-recommender/</link>
+      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/voting-recommender/</guid>
+      <description>In the Netherlands we have the StemWijzer a tool that calculates for which person to vote depending on your position on some statements. In Colombia they did not have such a tool yet. So I decided to make a template application which can work for any country. The only thing you need is a list of statements where you can agree with or not. And a list of persons of which you know their positions on those statements.</description>
+    </item>
     
     <item>
       <title>List of lists of different length to a data frame</title>
