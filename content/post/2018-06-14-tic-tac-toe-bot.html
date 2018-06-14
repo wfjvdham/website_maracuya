@@ -1,0 +1,70 @@
+---
+title: Tic-tac-toe bot
+author: Wim van der Ham
+date: '2018-06-14'
+slug: tic-tac-toe-bot
+categories:
+  - java
+tags:
+  - bot
+  - games
+  - minmax
+---
+
+
+
+<p><a href="https://www.riddles.io/">Riddles.io</a> is a platform were you can practice your AI skills. You can compete with other groups or persons on different challenges. For all those challenges you have to program an agent or bot that takes actions depending on what your opponents do. One of those challenges is about playing the game of <a href="https://playground.riddles.io/competitions/ultimate-tic-tac-toe">ultimate tic tac toe</a>. This a more complex, and more interesting, version of the classical tic tac toe. I made a <a href="https://github.com/wfjvdham/tictactoejava">bot</a> in <code>java</code> that uses MinMax with Alpha–beta pruning and competed in the competition.</p>
+<div id="minmax" class="section level2">
+<h2>MinMax</h2>
+<p>For this bot I used the <a href="https://en.wikipedia.org/wiki/Minimax">MinMax</a> algorithm. This is a common algorithm in a game of two players taking turns. In this approach a score is calculate for the state of the board. If you win the game the score is <code>Inf</code> if you lose <code>-Inf</code>. The other scores are between <code>-Inf</code> and <code>Inf</code> and depend on the positions of the board which I will explain later. For all the actions the bot can take it will calculate what the worst response of the opponent is depending on the score. From this worst opponent moves (<code>min</code>) it pick the best (<code>max</code>) and selects the corresponding move.</p>
+<p>Using this algorithm recursively you can calculate a few steps in advanced which gives the best move. Calculating all the possible outcomes is not possible because there is a time limit in which you need to respond.</p>
+</div>
+<div id="alphabeta-pruning" class="section level2">
+<h2>Alpha–beta pruning</h2>
+<p><a href="https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning">Alpha–beta pruning</a> is a way to optimize the searching space. First you search a deep as possible in the tree. After that you continue with the next leafs. But if the results in the next leafs cannot be better anymore than what you found before already, you do not continue with searching deeper in this part of the tree. This way some parts can be eliminated which saves time. The next graph from wikipedia illustrates this.</p>
+<div class="figure">
+<img src="/post/2018-06-14-tic-tac-toe-bot_files/AB_pruning.svg" alt="An illustration of alpha–beta pruning. The grayed-out subtrees need not be explored (when moves are evaluated from left to right), since we know the group of subtrees as a whole yields the value of an equivalent subtree or worse, and as such cannot influence the final result. The max and min levels represent the turn of the player and the adversary, respectively." />
+<p class="caption">An illustration of alpha–beta pruning. The grayed-out subtrees need not be explored (when moves are evaluated from left to right), since we know the group of subtrees as a whole yields the value of an equivalent subtree or worse, and as such cannot influence the final result. The max and min levels represent the turn of the player and the adversary, respectively.</p>
+</div>
+</div>
+<div id="scoring-the-game-state" class="section level2">
+<h2>Scoring the Game State</h2>
+<p>Since a complete calculation of all possible options until the end of the game is not possible we need to score intermediate states in some way. In <a href="https://en.wikipedia.org/wiki/Ultimate_tic-tac-toe">Ultimate tic tac toe</a> the board consists of 9 micro boards and 1 macro board. When you win a micro board you win 1 position in the macro board. When you win the macro board you win the game.</p>
+<div id="macro-board" class="section level3">
+<h3>Macro Board</h3>
+<p>For calculating the score depending on the macro board I use the following steps:</p>
+<ul>
+<li><code>1000000</code> for every position on the board that will result in a win for you when placing your token there</li>
+<li><code>10000</code> for every different possibility you have of making three in a row on the macro board. During the game this amount will reduce because your opponent will win micro boards or they will be tied.</li>
+</ul>
+</div>
+<div id="micro-board" class="section level3">
+<h3>Micro Board</h3>
+<p>For scoring th micro board it become a bit more complex. First for all the micro boards a score factor is calculated. The score factor of micro boards that cannot provide you with a win anymore are zero. You do not gain anything from winning this micro board. For micro boards that can still give you a win the factor is calculated depending on two things:</p>
+<ol style="list-style-type: decimal">
+<li><code>0.1</code> For every way in which the micro board can give you a win, where you have no other tokens on the line.</li>
+<li><code>0.2</code> For every way in which the micro board can give you a win, where you already have another token on the line.</li>
+</ol>
+<p>Let me clarify these rules with an example. Lets say the current board state is as follows.</p>
+<div class="figure">
+<img src="/post/2018-06-14-tic-tac-toe-bot_files/Incomplete_Ultimate_Tic-Tac-Toe_Board.png" alt="The board of an incomplete ultimate tic-tac-toe game (the large Xs and Os representing micro board which have been won by that player)." />
+<p class="caption">The board of an incomplete ultimate tic-tac-toe game (the large “X”s and “O”s representing micro board which have been won by that player).</p>
+</div>
+<p>We calculate the micro board factor for the middle-left square. There are still two ways this square can give you a win.</p>
+<ol style="list-style-type: decimal">
+<li>By making three in a row from top to bottom on the left side</li>
+<li>By making three in a row left to right on the middle line</li>
+</ol>
+<p>Both options already have one token on them so the total factor is <code>0.2 + 0.2 = 0.4</code>. For the bottom-middle square there is only 1 option left, which has already 1 token so the factor is <code>0.2</code>.</p>
+<p>After calculating the factors the score for the micro boards is calculated by</p>
+<ul>
+<li><code>100</code> <em>times</em> factor <em>times</em> number of moves that make you win the board</li>
+<li><code>1</code> <em>times</em> factor <em>times</em> number of ways you can still win the board</li>
+</ul>
+<p>The score for the micro board is added to the score of the macro board and the total is the score of the current state. For the opponent it is done in the same way only the result is multiplied with <code>0.95</code>. This to make sure the bot focuses a bit more on winning than on preventing the opponent of winning. Without this really funny behavior emerges where the bot sometimes only tries to prevent the opponent from winning while forgetting about winning himself.</p>
+</div>
+</div>
+<div id="best-result" class="section level2">
+<h2>Best Result</h2>
+<p>This scoring method is far from perfect but some kind of heuristic needs to be used to determine which state is better. I invite everybody to improve this more. This bot got to position <em>78</em> out of <em>448</em> during the competition.</p>
+</div>

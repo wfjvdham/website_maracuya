@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Tic-tac-toe bot</title>
+      <link>/post/tic-tac-toe-bot/</link>
+      <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/tic-tac-toe-bot/</guid>
+      <description>Riddles.io is a platform were you can practice your AI skills. You can compete with other groups or persons on different challenges. For all those challenges you have to program an agent or bot that takes actions depending on what your opponents do. One of those challenges is about playing the game of ultimate tic tac toe. This a more complex, and more interesting, version of the classical tic tac toe.</description>
+    </item>
+    
+    <item>
       <title>Voting Recommender</title>
       <link>/post/voting-recommender/</link>
       <pubDate>Thu, 14 Jun 2018 00:00:00 +0000</pubDate>
