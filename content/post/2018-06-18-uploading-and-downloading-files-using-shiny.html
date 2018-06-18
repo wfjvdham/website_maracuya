@@ -1,0 +1,98 @@
+---
+title: Uploading and Downloading files using Shiny
+author: Wim van der Ham
+date: '2018-06-18'
+slug: uploading-and-downloading-files-using-shiny
+categories:
+  - R
+  - shiny
+tags:
+  - Kobo
+---
+
+
+
+<p>When reading interesting books on my <a href="https://www.kobo.com/">Kobo</a> reader, I like to mark some parts of the text. Using those notes later can be difficult because they are stored on your Kobo in a *.annot file. To convert them to a readable *.txt file I made a <code>shiny</code> <a href="https://maracuya.shinyapps.io/extract_notes_kobo/">app</a>. After converting you can you the result online and download it if you want. The code can be found <a href="https://github.com/wfjvdham/kobo_note_extractor">here</a>.</p>
+<div id="uploading-a-file" class="section level2">
+<h2>Uploading a File</h2>
+<p>In <code>shiny</code> you can upload a file using the <code>fileInput()</code> function, that creates an upload control element that can be used to upload files. The first argument of the function is an id that an be referenced in the server part of your app. The second argument is the label of the element, where you can put a description for what the user should do with it. The <code>accept</code> argument can be used to restrict the file extensions that are accepted. In this case I want to accept only *.annot files so I put that in the argument. The <code>fileInput()</code> function now looks like this:</p>
+<pre class="r"><code>fileInput(&quot;file_input&quot;, 
+          &quot;Choose *.annot File to extract your notes from&quot;,
+          accept = &quot;.annot&quot;)</code></pre>
+</div>
+<div id="reading-data-from-uploaded-file" class="section level2">
+<h2>Reading Data from Uploaded File</h2>
+<p>The element to upload the file is there, now we need to read the data from the file. The <code>fileInput()</code> stores the provided file on a temporary location on your server and creates an object that is stored in the <code>input</code> object using the id you gave it. In this case it is stored in <code>input$file_input</code>. The object has contains some metadata about the file and most importantly the location where it is stored on your server. Using <code>input$file_input$datapath</code> we can acces that location and read the file like it was a local file. Using <code>input$file_input$name</code> we can get the original filename.</p>
+<div id="the-.annot-file" class="section level3">
+<h3>The *.annot File</h3>
+<p>Before we can read the data first we need to see how the data in an *.annot file is formatted. This is an example of a single note I made in the *.annot file.</p>
+<pre><code>&lt;annotationSet xmlns:xhtml=&quot;http://www.w3.org/1999/xhtml&quot; xmlns:dc=&quot;http://purl.org/dc/elements/1.1/&quot; xmlns=&quot;http://ns.adobe.com/digitaleditions/annotations&quot;&gt;
+  &lt;publication&gt;
+    &lt;dc:identifier&gt;urn:uuid:9781588367679&lt;/dc:identifier&gt;
+    &lt;dc:title&gt;Fooled by Randomness&lt;/dc:title&gt;
+    &lt;dc:creator&gt;Nassim Nicholas Taleb&lt;/dc:creator&gt;
+    &lt;dc:publisher&gt;&lt;/dc:publisher&gt;
+  &lt;/publication&gt;
+  &lt;annotation&gt;
+    &lt;dc:identifier&gt;urn:uuid:b1dfe25b-6c2e-48dd-a662-9ff9403e7574&lt;/dc:identifier&gt;
+    &lt;dc:date&gt;2012-05-15T06:47:00Z&lt;/dc:date&gt;
+    &lt;target&gt;
+      &lt;fragment start=&quot;OEBPS/Tale_9781588367679_epub_c07_r1.htm#point(/1/3/1/102/7:110)&quot; end=&quot;OEBPS/Tale_9781588367679_epub_c07_r1.htm#point(/1/3/1/102/7:229)&quot; progress=&quot;0&quot;&gt;
+      &lt;text&gt; theory that does not present a set of conditions under which it would be considered wrong would be termed charlatanism&lt;/text&gt;
+      &lt;/fragment&gt;
+    &lt;/target&gt;
+    &lt;content&gt;
+      &lt;dc:date&gt;2012-05-15T06:47:00Z&lt;/dc:date&gt;
+    &lt;/content&gt;
+  &lt;/annotation&gt;
+  ...</code></pre>
+<p>As you can see it is formatted using <a href="https://en.wikipedia.org/wiki/XML"><code>XML</code></a>. For reading <code>XML</code> files in R you can use packages like (whats in the name) <a href="http://www.omegahat.net/RSXML/"><code>XML</code></a>. But I want to try using <a href="https://github.com/hadley/rvest"><code>rvest</code></a> because I use it already in other applications and know more of the functionalities. <code>rvest</code> is made for webscraping but reading a html file or a xml file is quite simmulair and than I do not need to look for all the functions in the <code>XML</code> package. The code for getting the notes in a nice format from this xml file using <code>rvest</code> is:</p>
+<pre class="r"><code>rv$notes &lt;- input$file_input$datapath %&gt;%
+  read_html() %&gt;%
+  html_nodes(&quot;fragment&quot;) %&gt;%
+  html_text() %&gt;%
+  str_trim()</code></pre>
+<p>As an input I take the file location on the server <code>input$file_input$datapath</code>, I read the file like it was an html file. I select only the <code>fragment</code> nodes, since there is the actual notation. The text is extracted, trimmed from whitespaces and stored in a variable that is accesible for other functions in the app. The data is also presented to the user so he can chack if it is corrent.</p>
+</div>
+</div>
+<div id="downloading-a-file" class="section level2">
+<h2>Downloading a File</h2>
+<p>We have the data we need so we can add a download button which allows the user to download the notes in a *.txt file. A download button in shiny requires two parts:</p>
+<ol style="list-style-type: decimal">
+<li>A <code>downloadButton()</code> function in the UI to create the button.</li>
+<li>A <code>downloadHandler()</code> function in the server to connect a button with the data.</li>
+</ol>
+<p>The <code>downloadButton()</code> function first argument is the id by which it can be referenced later. The <code>label</code> argument is used to set the text on the button. I also set the <code>class</code> of the button to change the color, but this is optional.</p>
+<p>The function creating the button looks like this:</p>
+<pre class="r"><code>downloadButton(&quot;downloadData&quot;, label = &quot;Download Notes&quot;, class=&quot;btn btn-primary&quot;)</code></pre>
+<div id="req" class="section level3">
+<h3>req()</h3>
+<p>The download button and the data from the file can only be show when a file is uploaded. Before that there is not data to show and no file to donwload. To do this in <code>shiny</code> the <code>req()</code> function is usefull. This function evaluates to <code>FALSE</code> if the user did not provided an imput<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. If the result is <code>FALSE</code> the rest of the code in the function does not run. Putting <code>req(input$file_input)</code> before the function that generated the download button and before the function that reads the data makes sure those things are only done after there is data.</p>
+</div>
+<div id="downloadhandler" class="section level3">
+<h3>downloadHandler()</h3>
+<p>The <code>downloadHandler()</code> function takes two other functions as input arguments.</p>
+<ol style="list-style-type: decimal">
+<li><strong>filename</strong> to create the filename</li>
+<li><strong>content</strong> to provide the data</li>
+</ol>
+<p>The filename is here created using the name of the file uploaded, which is stored in <code>input$file_input$name</code>, and adds <em>.notes.txt</em> to it to make clear that this file contains the notes. The content of the file is created using the <code>write_lines()</code> function. This funciton takes a character vector or list of raw vectors and appends a new line after each entry. The result looks like this:</p>
+<pre class="r"><code>output$downloadData &lt;- downloadHandler(
+  filename = function() {
+    paste0(input$file_input$name, &quot;.notes.txt&quot;)
+  },
+  content = function(con) {
+    rv$notes %&gt;%
+      write_lines(con)
+  }
+)</code></pre>
+<p>The name of the id you provided to your donwload button needs to be the same as the name where you store the result of the <code>downloadHandler()</code> function.</p>
+<p>This should be enough to give you an idea how you can upload, use and download a file using <code>shiny</code>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This is almost the same a checking if the value is <code>NULL</code>. The difference is that is works for all inputs <code>shiny</code> uses. For example, a textInput that has not been filled out by the user has a value of “”, so that is evaluated to <code>FALSE</code><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

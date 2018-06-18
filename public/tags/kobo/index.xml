@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kobo on </title>
+    <link>/tags/kobo/</link>
+    <description>Recent content in Kobo on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/kobo/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Uploading and Downloading files using Shiny</title>
+      <link>/post/uploading-and-downloading-files-using-shiny/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/uploading-and-downloading-files-using-shiny/</guid>
+      <description>When reading interesting books on my Kobo reader, I like to mark some parts of the text. Using those notes later can be difficult because they are stored on your Kobo in a *.annot file. To convert them to a readable *.txt file I made a shiny app. After converting you can you the result online and download it if you want. The code can be found here.
+Uploading a File In shiny you can upload a file using the fileInput() function, that creates an upload control element that can be used to upload files.</description>
+    </item>
+    
+  </channel>
+</rss>

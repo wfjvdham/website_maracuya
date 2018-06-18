@@ -1,0 +1,112 @@
+---
+title: Uploading and Downloading files using Shiny
+author: Wim van der Ham
+date: '2018-06-18'
+slug: uploading-and-downloading-files-using-shiny
+categories:
+  - R
+  - shiny
+tags:
+  - Kobo
+---
+
+When reading interesting books on my [Kobo](https://www.kobo.com/) reader, I like to mark some parts of the text. Using those notes later can be difficult because they are stored on your Kobo in a \*.annot file. To convert them to a readable \*.txt file I made a `shiny` [app](https://maracuya.shinyapps.io/extract_notes_kobo/). After converting you can you the result on-line and download it if you want. The code can be found [here](https://github.com/wfjvdham/kobo_note_extractor).
+
+## Uploading a File
+
+In `shiny` you can upload a file using the `fileInput()` function, that creates an upload control element that can be used to upload files. The first argument of the function is an id that an be referenced in the server part of your app. The second argument is the label of the element, where you can put a description for what the user should do with it. The `accept` argument can be used to restrict the file extensions that are accepted. In this case I want to accept only \*.annot files so I put that in the argument. The `fileInput()` function now looks like this:
+
+```{r, eval=FALSE}
+fileInput("file_input",
+          "Choose *.annot File to extract your notes from",
+          accept = ".annot")
+```
+
+## Reading Data from Uploaded File
+
+The element to upload the file is there, now we need to read the data from the file. The `fileInput()` stores the provided file on a temporary location on your server and creates an object that is stored in the `input` object using the id you gave it. In this case it is stored in `input$file_input`. The object has contains some meta data about the file and most importantly the location where it is stored on your server. Using `input$file_input$datapath` we can access that location and read the file like it was a local file. Using `input$file_input$name` we can get the original filename.
+
+### The \*.annot File
+
+Before we can read the data first we need to see how the data in an \*.annot file is formatted. This is an example of a single note I made in the \*.annot file.
+
+```
+<annotationSet xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://ns.adobe.com/digitaleditions/annotations">
+  <publication>
+    <dc:identifier>urn:uuid:9781588367679</dc:identifier>
+    <dc:title>Fooled by Randomness</dc:title>
+    <dc:creator>Nassim Nicholas Taleb</dc:creator>
+    <dc:publisher></dc:publisher>
+  </publication>
+  <annotation>
+    <dc:identifier>urn:uuid:b1dfe25b-6c2e-48dd-a662-9ff9403e7574</dc:identifier>
+    <dc:date>2012-05-15T06:47:00Z</dc:date>
+    <target>
+      <fragment start="OEBPS/Tale_9781588367679_epub_c07_r1.htm#point(/1/3/1/102/7:110)" end="OEBPS/Tale_9781588367679_epub_c07_r1.htm#point(/1/3/1/102/7:229)" progress="0">
+      <text> theory that does not present a set of conditions under which it would be considered wrong would be termed charlatanism</text>
+      </fragment>
+    </target>
+    <content>
+      <dc:date>2012-05-15T06:47:00Z</dc:date>
+    </content>
+  </annotation>
+  ...
+```
+
+As you can see it is formatted using [`XML`](https://en.wikipedia.org/wiki/XML). For reading `XML` files in R you can use packages like (whats in the name) [`XML`](http://www.omegahat.net/RSXML/). But I want to try using [`rvest`](https://github.com/hadley/rvest) because I use it already in other applications and know more of the functionalities. `rvest` is made for web scraping but reading a html file or a xml file is quite simular and than I do not need to look for all the functions in the `XML` package. The code for getting the notes in a nice format from this xml file using `rvest` is:
+
+```{r, eval=FALSE}
+rv$notes <- input$file_input$datapath %>%
+  read_html() %>%
+  html_nodes("fragment") %>%
+  html_text() %>%
+  str_trim()
+```
+
+As an input I take the file location on the server `input$file_input$datapath`, I read the file like it was an html file. I select only the `fragment` nodes, since there is the actual notation. The text is extracted, trimmed from white spaces and stored in a variable that is accessible for other functions in the app. The data is also presented to the user so he can check if it is correct.
+
+## Downloading a File
+
+We have the data we need so we can add a download button which allows the user to download the notes in a \*.txt file. A download button in shiny requires two parts:
+
+1. A `downloadButton()` function in the UI to create the button.
+1. A `downloadHandler()` function in the server to connect a button with the data.
+
+The `downloadButton()` function first argument is the id by which it can be referenced later. The `label` argument is used to set the text on the button. I also set the `class` of the button to change the color, but this is optional.
+
+The function creating the button looks like this:
+
+```{r, eval=FALSE}
+downloadButton("downloadData", label = "Download Notes", class="btn btn-primary")
+```
+
+### req()
+
+The download button and the data from the file can only be show when a file is uploaded. Before that there is not data to show and no file to download. To do this in `shiny` the `req()` function is useful. This function evaluates to `FALSE` if the user did not provided an imput[^truthy]. If the result is `FALSE` the rest of the code in the function does not run. Putting `req(input$file_input)` before the function that generated the download button and before the function that reads the data makes sure those things are only done after there is data.
+
+### downloadHandler()
+
+The `downloadHandler()` function takes two other functions as input arguments.
+
+1. **filename** to create the filename
+1. **content** to provide the data
+
+The filename is here created using the name of the file uploaded, which is stored in `input$file_input$name`, and adds *.notes.txt* to it to make clear that this file contains the notes. The content of the file is created using the `write_lines()` function. This function takes a character vector or list of raw vectors and appends a new line after each entry. The result looks like this:
+
+```{r, eval=FALSE}
+output$downloadData <- downloadHandler(
+  filename = function() {
+    paste0(input$file_input$name, ".notes.txt")
+  },
+  content = function(con) {
+    rv$notes %>%
+      write_lines(con)
+  }
+)
+```
+
+The name of the id you provided to your download button needs to be the same as the name where you store the result of the `downloadHandler()` function.
+
+This should be enough to give you an idea how you can upload, use and download a file using `shiny`.
+
+[^truthy]: This is almost the same a checking if the value is `NULL`. The difference is that is works for all inputs `shiny` uses. For example, a textInput that has not been filled out by the user has a value of "", so that is evaluated to `FALSE`
