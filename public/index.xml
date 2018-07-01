@@ -17,7 +17,7 @@
       <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/uploading-and-downloading-files-using-shiny/</guid>
-      <description>When reading interesting books on my Kobo reader, I like to mark some parts of the text. Using those notes later can be difficult because they are stored on your Kobo in a *.annot file. To convert them to a readable *.txt file I made a shiny app. After converting you can you the result online and download it if you want. The code can be found here.
+      <description>When reading interesting books on my Kobo reader, I like to mark some parts of the text. Using those notes later can be difficult because they are stored on your Kobo in a *.annot file. To convert them to a readable *.txt file I made a shiny app. After converting you can you the result on-line and download it if you want. The code can be found here.
 Uploading a File In shiny you can upload a file using the fileInput() function, that creates an upload control element that can be used to upload files.</description>
     </item>
     
@@ -76,8 +76,8 @@ So if you are interested in making some Mojarras fritas (and you know a little S
       <guid>/about/</guid>
       <description>This is a maracuya…
 …my favorite Colombian fruit.
- But Maracuya IT is my company for giving classes about R. I offer four courses at the moment:
-R - Basics, for people who have zero or little experience with R. The basic about how to explore data, create graphics, do some simple statistical models and present the results is explained. The tidyverse packages are used for this. R - Machine Learning, this course focuses on using more complex statistical models in R.</description>
+ But Maracuya IT is my company for giving courses about R. I offer four courses at the moment:
+ Basics starting point if you have few or zero experience with R. The basic concepts are explained here.  Introduction about me, R and this course Exploring data using the ggplot2 and dplyr packages Presenting results using the rmarkdown package More exercises about exploring data Transforming data to a tidy format using the tidy package Make calculations with times and dates using the lubridate package Reading data from a file into R using the readr package, or connect to a database using the DBI package An introduction into statistical models Making a simple linear model Making a simple logistic regression model   ML here more advanced techniques for modeling a dataset are explained  Explanation of re sampling techniques like cross validation and bootstrapping Automatic feature selection Decision trees and random forests More examples for modeling and the Simpson’s paradox   Big Data explanation of what is big data, hadoop and spark and how to use it in combination with R  Introduction to Big Data Introduction to Hadoop, MapReduce ans Spark Introduction to the sparklyr package Introduction to Cloudera   Advanced here more advanced R topics are explained  Functional programming using the purrr package Making interactive web pages using shiny Using asynchronous programming in a shiny application Scraping information from an internet page using the rvest package  This website will contain examples of what you can do with the knowledge obtained in these courses.</description>
     </item>
     
   </channel>
