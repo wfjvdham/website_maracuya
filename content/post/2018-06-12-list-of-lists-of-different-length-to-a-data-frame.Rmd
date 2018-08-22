@@ -11,6 +11,8 @@ tags:
 slug: list-of-lists-of-different-length-to-a-data-frame
 ---
 
+**NOTE** The example is not working anymore because the website is down.
+
 When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example [here](https://github.com/wfjvdham/wildcard_ek). It is a shiny application that reads data from the [eredivisie beach site](https://www.eredivisiebeach.nl/) and uses it to culculate the current standings for the wildcards for the EC.
 
 ## rvest
@@ -23,7 +25,7 @@ library(rvest)
 library(knitr)
 ```
 
-```{r}
+```{r, eval=FALSE}
 toernooi_plaatsen <- c("vlissingen", "zutphen", "arnhem", "utrecht", "leeuwarden", 
                        "eindhoven", "heerenveen", "groningen")
 
@@ -43,7 +45,7 @@ The result is a list of lists of different lengths.
 
 The `unlist()` function is very important here. It takes the second layer of lists and put them next to eachother in one big list. This big list I can put in a column of a data frame by using the `tibble()` funciton.
 
-```{r}
+```{r, eval=FALSE}
 df <- tibble(
   team_names = team_names %>%
     unlist()
@@ -55,7 +57,7 @@ df %>%
 
 For me this was wat I needed. It can be that you want to remember from which sublist the data came. In that case you have to set the names of the list and unlist the names as well.
 
-```{r}
+```{r, eval=FALSE}
 names(team_names) <- toernooi_plaatsen
 df <- tibble(
   team_names = team_names %>%
