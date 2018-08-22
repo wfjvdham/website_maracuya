@@ -6,10 +6,19 @@
     <description>Recent content in R on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rolling Average over Different Time Periods</title>
+      <link>/post/rolling-average-over-different-time-periods/</link>
+      <pubDate>Wed, 22 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/rolling-average-over-different-time-periods/</guid>
+      <description>For a long time I have been using the 7 minute workout app. Every time you finish a workout the app shows you how many workouts you did for the last 30 days. This is nice but it does not tell you how it relates to anything you did before the last 30 days. So around a year ago I decided to start storing the dates with this number. Now I can make a graph that shows me how often I did my exercises in the last 30 days and the average for the last year.</description>
+    </item>
     
     <item>
       <title>Uploading and Downloading files using Shiny</title>
@@ -36,7 +45,8 @@ Uploading a File In shiny you can upload a file using the fileInput() function, 
       <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/list-of-lists-of-different-length-to-a-data-frame/</guid>
-      <description>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example here. It is a shiny application that reads data from the eredivisie beach site and uses it to culculate the current standings for the wildcards for the EC.</description>
+      <description>NOTE The example is not working anymore because the website is down.
+When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example here.</description>
     </item>
     
     <item>

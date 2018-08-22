@@ -139,7 +139,8 @@
       </span>  
   </div>    
   
-  <p>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example <a href="https://github.com/wfjvdham/wildcard_ek">here</a>. It is a shiny application that reads data from the <a href="https://www.eredivisiebeach.nl/">eredivisie beach site</a> and uses it to culculate the current standings for the wildcards for the EC.</p>
+  <p><strong>NOTE</strong> The example is not working anymore because the website is down.</p>
+<p>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example <a href="https://github.com/wfjvdham/wildcard_ek">here</a>. It is a shiny application that reads data from the <a href="https://www.eredivisiebeach.nl/">eredivisie beach site</a> and uses it to culculate the current standings for the wildcards for the EC.</p>
 <div id="rvest" class="section level2">
 <h2>rvest</h2>
 <p>For the scraping of the data I use the <a href="https://github.com/hadley/rvest"><code>rvest</code></a> package. It has a function <code>read_html()</code> to get the html from a specific page and the funciton <code>html_nodes()</code> to get the content of some specific nodes on the page. The eredivisiebeach uses differen urls for different tournaments so I use the <code>map()</code> function to loop over the different urls. The next example shows how I collected the names of the teams. In a simular way I collected the points and the ranking.</p>
@@ -154,7 +155,6 @@ team_names &lt;- data %&gt;%
   map(html_nodes, &quot;.ranking_team_name&quot;) %&gt;% 
   map(html_text)
 c(length(team_names[[1]]), length(team_names[[3]]))</code></pre>
-<pre><code>## [1] 24 25</code></pre>
 <p>The result is a list of lists of different lengths.</p>
 </div>
 <div id="unlist" class="section level2">
@@ -167,33 +167,6 @@ c(length(team_names[[1]]), length(team_names[[3]]))</code></pre>
 df %&gt;%
   slice(1:6) %&gt;%
   kable()</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">team_names</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Sophie van Gestel / Marloes Wesselink</td>
-</tr>
-<tr class="even">
-<td align="left">Quirine Oosterveld / Mered de Vries</td>
-</tr>
-<tr class="odd">
-<td align="left">Sarah van Esch / Britt den Haan</td>
-</tr>
-<tr class="even">
-<td align="left">Annemieke Driessen / Ilke Meertens</td>
-</tr>
-<tr class="odd">
-<td align="left">Mexime van Driel / Flore Gravesteijn</td>
-</tr>
-<tr class="even">
-<td align="left">Hiske van Duinen / Lauri Luijken</td>
-</tr>
-</tbody>
-</table>
 <p>For me this was wat I needed. It can be that you want to remember from which sublist the data came. In that case you have to set the names of the list and unlist the names as well.</p>
 <pre class="r"><code>names(team_names) &lt;- toernooi_plaatsen
 df &lt;- tibble(
@@ -206,40 +179,6 @@ df &lt;- tibble(
 df %&gt;%
   slice(1:6) %&gt;%
   kable()</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">team_names</th>
-<th align="left">tournaments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Sophie van Gestel / Marloes Wesselink</td>
-<td align="left">vlissingen1</td>
-</tr>
-<tr class="even">
-<td align="left">Quirine Oosterveld / Mered de Vries</td>
-<td align="left">vlissingen2</td>
-</tr>
-<tr class="odd">
-<td align="left">Sarah van Esch / Britt den Haan</td>
-<td align="left">vlissingen3</td>
-</tr>
-<tr class="even">
-<td align="left">Annemieke Driessen / Ilke Meertens</td>
-<td align="left">vlissingen4</td>
-</tr>
-<tr class="odd">
-<td align="left">Mexime van Driel / Flore Gravesteijn</td>
-<td align="left">vlissingen5</td>
-</tr>
-<tr class="even">
-<td align="left">Hiske van Duinen / Lauri Luijken</td>
-<td align="left">vlissingen6</td>
-</tr>
-</tbody>
-</table>
 <p>The names are than combined with an index in an extra column.</p>
 </div>
 

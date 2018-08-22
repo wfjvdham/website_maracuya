@@ -36,7 +36,8 @@ Uploading a File In shiny you can upload a file using the fileInput() function, 
       <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/list-of-lists-of-different-length-to-a-data-frame/</guid>
-      <description>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example here. It is a shiny application that reads data from the eredivisie beach site and uses it to culculate the current standings for the wildcards for the EC.</description>
+      <description>NOTE The example is not working anymore because the website is down.
+When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example here.</description>
     </item>
     
     <item>
