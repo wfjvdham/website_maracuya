@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     
     
-    <meta name="generator" content="Hugo 0.40.3" />
+    <meta name="generator" content="Hugo 0.53" />
     
     <title>List of lists of different length to a data frame &middot; </title>
     <meta content="List of lists of different length to a data frame - " property="og:title">
@@ -89,7 +89,7 @@
 </section>
 
         </p>
-		<p class="copyright">&copy; 2018 Wim van der Ham.
+		<p class="copyright">&copy; 2019 Wim van der Ham.
         <a href="https://creativecommons.org/licenses/by/4.0">Some Rights Reserved</a>.<br/>Built with <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
         </p>
 	</div>
@@ -139,7 +139,10 @@
       </span>  
   </div>    
   
-  <p><strong>NOTE</strong> The example is not working anymore because the website is down.</p>
+  
+
+
+<p><strong>NOTE</strong> The example is not working anymore because the website is down.</p>
 <p>When scraping data from an internet page it is commun that it is not nicely formatted in table kind of way. To me it happens a lot that you get a list of lists and that the second layer of lists have different lengths. To convert this kind of data can be tricky so I made an example <a href="https://github.com/wfjvdham/wildcard_ek">here</a>. It is a shiny application that reads data from the <a href="https://www.eredivisiebeach.nl/">eredivisie beach site</a> and uses it to culculate the current standings for the wildcards for the EC.</p>
 <div id="rvest" class="section level2">
 <h2>rvest</h2>
@@ -225,12 +228,16 @@ df %&gt;%
         </div>
         
         
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-119902709-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-119902709-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
         
     </body>
 </html>

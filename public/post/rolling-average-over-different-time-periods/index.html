@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     
     
-    <meta name="generator" content="Hugo 0.40.3" />
+    <meta name="generator" content="Hugo 0.53" />
     
     <title>Rolling Average over Different Time Periods &middot; </title>
     <meta content="Rolling Average over Different Time Periods - " property="og:title">
@@ -89,7 +89,7 @@
 </section>
 
         </p>
-		<p class="copyright">&copy; 2018 Wim van der Ham.
+		<p class="copyright">&copy; 2019 Wim van der Ham.
         <a href="https://creativecommons.org/licenses/by/4.0">Some Rights Reserved</a>.<br/>Built with <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
         </p>
 	</div>
@@ -136,7 +136,10 @@
       </span>  
   </div>    
   
-  <p>For a long time I have been using the <a href="https://7-minute-workout.droidinformer.org/">7 minute workout app</a>. Every time you finish a workout the app shows you how many workouts you did for the last 30 days. This is nice but it does not tell you how it relates to anything you did before the last 30 days. So around a year ago I decided to start storing the dates with this number. Now I can make a <a href="https://maracuya.shinyapps.io/fitness/">graph</a> that shows me how often I did my exercises in the last 30 days and the average for the last year. Here I will explain how I used the <code>zoo</code> package to do that.</p>
+  
+
+
+<p>For a long time I have been using the <a href="https://7-minute-workout.droidinformer.org/">7 minute workout app</a>. Every time you finish a workout the app shows you how many workouts you did for the last 30 days. This is nice but it does not tell you how it relates to anything you did before the last 30 days. So around a year ago I decided to start storing the dates with this number. Now I can make a <a href="https://maracuya.shinyapps.io/fitness/">graph</a> that shows me how often I did my exercises in the last 30 days and the average for the last year. Here I will explain how I used the <code>zoo</code> package to do that.</p>
 <div id="zoo-for-calculating-the-rolling-average" class="section level1">
 <h1><code>zoo</code> for Calculating the Rolling Average</h1>
 <p>When you want to do something advanced with time series in R the <a href="https://cran.r-project.org/web/packages/zoo/"><code>zoo</code> package</a> is a really useful tool. For now I will only talk about the <code>rollmean()</code> function which you can use to calculate a rolling average. This is an average calculated over a subset of the data. At any point the average is calculate over the last <em>n</em>-data points. For the next point one new point is added to the subset and one old point is removed from it.</p>
@@ -154,11 +157,11 @@ data_i_have</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   date       last_30days
 ##   &lt;date&gt;           &lt;dbl&gt;
-## 1 2018-08-12           1
-## 2 2018-08-14           2
-## 3 2018-08-16           3
-## 4 2018-08-18           4
-## 5 2018-08-20           5</code></pre>
+## 1 2018-12-25           1
+## 2 2018-12-27           2
+## 3 2018-12-29           3
+## 4 2018-12-31           4
+## 5 2019-01-02           5</code></pre>
 </div>
 <div id="and-seq-for-transforming-the-data" class="section level1">
 <h1>And <code>seq()</code> for Transforming the Data</h1>
@@ -166,7 +169,7 @@ data_i_have</code></pre>
 <p>Using the <code>seq()</code> function, in combination with the <a href="https://lubridate.tidyverse.org/"><code>lubridate</code></a> package for the calculations of the dates, gives me the list I want.</p>
 <pre class="r"><code>days_last_year &lt;- seq(today() - years(1), today(), by = &quot;1 day&quot;)
 days_last_year[1:5]</code></pre>
-<pre><code>## [1] &quot;2017-08-22&quot; &quot;2017-08-23&quot; &quot;2017-08-24&quot; &quot;2017-08-25&quot; &quot;2017-08-26&quot;</code></pre>
+<pre><code>## [1] &quot;2018-01-04&quot; &quot;2018-01-05&quot; &quot;2018-01-06&quot; &quot;2018-01-07&quot; &quot;2018-01-08&quot;</code></pre>
 <p>This list I can use to generate the dataset that I want:</p>
 <pre class="r"><code>data_i_want &lt;- tibble(
   date = days_last_year
@@ -175,12 +178,12 @@ days_last_year[1:5]</code></pre>
   mutate(exersice = as.numeric(!is.na(last_30days)))
 tail(data_i_want)</code></pre>
 <pre><code>##           date last_30days exersice
-## 361 2018-08-17          NA        0
-## 362 2018-08-18           4        1
-## 363 2018-08-19          NA        0
-## 364 2018-08-20           5        1
-## 365 2018-08-21          NA        0
-## 366 2018-08-22          NA        0</code></pre>
+## 361 2018-12-30          NA        0
+## 362 2018-12-31           4        1
+## 363 2019-01-01          NA        0
+## 364 2019-01-02           5        1
+## 365 2019-01-03          NA        0
+## 366 2019-01-04          NA        0</code></pre>
 <p>Now I have the format which I can use as with the <code>rollmean()</code> function. I set the <code>fill</code> parameter to <code>NA</code> so the the size of the list created with <code>rollmean()</code> is the same as number of rows in the original data frame. The <code>align</code> parameter I set to <em>right</em> so I calculate the means starting from the latest day and go back step by step. For the oldest day where I do not have enough datapoints I will get <code>NA</code> values.</p>
 <pre class="r"><code>data_i_want &lt;- data_i_want %&gt;%
   mutate(
@@ -189,12 +192,12 @@ tail(data_i_want)</code></pre>
   )
 tail(data_i_want)</code></pre>
 <pre><code>##           date last_30days exersice last_month_mean last_year_mean
-## 361 2018-08-17          NA        0               3             NA
-## 362 2018-08-18           4        1               4             NA
-## 363 2018-08-19          NA        0               4             NA
-## 364 2018-08-20           5        1               5             NA
-## 365 2018-08-21          NA        0               5      0.4109589
-## 366 2018-08-22          NA        0               5      0.4109589</code></pre>
+## 361 2018-12-30          NA        0               3             NA
+## 362 2018-12-31           4        1               4             NA
+## 363 2019-01-01          NA        0               4             NA
+## 364 2019-01-02           5        1               5             NA
+## 365 2019-01-03          NA        0               5      0.4109589
+## 366 2019-01-04          NA        0               5      0.4109589</code></pre>
 <p>This data I can use to create the graph I want. The green line is the number of exercises I did in the last 30 days. The blue line, hardly visible with this example data, is the average over last year. For a nicer graph and my actual progress you have to go <a href="https://maracuya.shinyapps.io/fitness/">here</a></p>
 <pre class="r"><code>ggplot(data_i_want) +
   geom_step(aes(date, last_month_mean), color = &quot;green&quot;) +
@@ -254,12 +257,16 @@ tail(data_i_want)</code></pre>
         </div>
         
         
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-119902709-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-119902709-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
         
     </body>
 </html>

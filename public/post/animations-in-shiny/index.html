@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     
     
-    <meta name="generator" content="Hugo 0.40.3" />
+    <meta name="generator" content="Hugo 0.53" />
     
     <title>Animations in Shiny using TweenLite &middot; </title>
     <meta content="Animations in Shiny using TweenLite - " property="og:title">
@@ -89,7 +89,7 @@
 </section>
 
         </p>
-		<p class="copyright">&copy; 2018 Wim van der Ham.
+		<p class="copyright">&copy; 2019 Wim van der Ham.
         <a href="https://creativecommons.org/licenses/by/4.0">Some Rights Reserved</a>.<br/>Built with <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
         </p>
 	</div>
@@ -139,7 +139,10 @@
       </span>  
   </div>    
   
-  <p>From a colleague I heard about <a href="https://greensock.com/tweenlite">TweenLite</a>, a JavaScript library that can be used to animate objects on your website. You can move elements around by controlling their speed and position. I wanted to see how well this would work in a Shiny application so I experimented a little bit with that.</p>
+  
+
+
+<p>From a colleague I heard about <a href="https://greensock.com/tweenlite">TweenLite</a>, a JavaScript library that can be used to animate objects on your website. You can move elements around by controlling their speed and position. I wanted to see how well this would work in a Shiny application so I experimented a little bit with that.</p>
 <p>The result is an application that can keep track of the score of the <a href="https://en.wikipedia.org/wiki/The_Weakest_Link_(UK_game_show)">the weakest link</a>, a TV game show from more than 10 years ago. To see the app immediately go <a href="https://maracuya.shinyapps.io/theWeakestLink/">here</a>. The code can be found <a href="https://github.com/wfjvdham/theWeakestLink">here</a> and in the rest of this post I will explain what I did.</p>
 <div id="including-tweenlite" class="section level2">
 <h2>Including TweenLite</h2>
@@ -222,12 +225,16 @@
         </div>
         
         
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-119902709-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-119902709-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
         
     </body>
 </html>

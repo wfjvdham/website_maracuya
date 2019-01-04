@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     
     
-    <meta name="generator" content="Hugo 0.40.3" />
+    <meta name="generator" content="Hugo 0.53" />
     
     <title>Voting Recommender &middot; </title>
     <meta content="Voting Recommender - " property="og:title">
@@ -89,7 +89,7 @@
 </section>
 
         </p>
-		<p class="copyright">&copy; 2018 Wim van der Ham.
+		<p class="copyright">&copy; 2019 Wim van der Ham.
         <a href="https://creativecommons.org/licenses/by/4.0">Some Rights Reserved</a>.<br/>Built with <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/htr3n/hyde-hyde">hyde-hyde</a>.
         </p>
 	</div>
@@ -141,7 +141,10 @@
       </span>  
   </div>    
   
-  <p>In the Netherlands we have the <a href="https://stemwijzer.nl/">StemWijzer</a> a tool that calculates for which person to vote depending on your position on some statements. In Colombia they did not have such a tool yet. So I decided to make a <a href="https://maracuya.shinyapps.io/recommender/">template application</a> which can work for any country. The only thing you need is a list of statements where you can agree with or not. And a list of persons of which you know their positions on those statements. The code can be found <a href="https://github.com/wfjvdham/congreso-recomendador">here</a></p>
+  
+
+
+<p>In the Netherlands we have the <a href="https://stemwijzer.nl/">StemWijzer</a> a tool that calculates for which person to vote depending on your position on some statements. In Colombia they did not have such a tool yet. So I decided to make a <a href="https://maracuya.shinyapps.io/recommender/">template application</a> which can work for any country. The only thing you need is a list of statements where you can agree with or not. And a list of persons of which you know their positions on those statements. The code can be found <a href="https://github.com/wfjvdham/congreso-recomendador">here</a></p>
 <div id="data" class="section level2">
 <h2>Data</h2>
 <p>The data required for this app needs to be formatted in a specific way. The part that can be edited by the user has 4 vectors.</p>
@@ -219,12 +222,16 @@ POSITIONS &lt;- c(2, -2, 1, -1, 0, 2, -1, -1, 2)</code></pre>
         </div>
         
         
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-119902709-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-119902709-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
         
     </body>
 </html>

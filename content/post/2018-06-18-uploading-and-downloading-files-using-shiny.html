@@ -67,7 +67,7 @@ tags:
 <pre class="r"><code>downloadButton(&quot;downloadData&quot;, label = &quot;Download Notes&quot;, class=&quot;btn btn-primary&quot;)</code></pre>
 <div id="req" class="section level3">
 <h3>req()</h3>
-<p>The download button and the data from the file can only be show when a file is uploaded. Before that there is not data to show and no file to download. To do this in <code>shiny</code> the <code>req()</code> function is useful. This function evaluates to <code>FALSE</code> if the user did not provided an imput<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. If the result is <code>FALSE</code> the rest of the code in the function does not run. Putting <code>req(input$file_input)</code> before the function that generated the download button and before the function that reads the data makes sure those things are only done after there is data.</p>
+<p>The download button and the data from the file can only be show when a file is uploaded. Before that there is not data to show and no file to download. To do this in <code>shiny</code> the <code>req()</code> function is useful. This function evaluates to <code>FALSE</code> if the user did not provided an imput<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. If the result is <code>FALSE</code> the rest of the code in the function does not run. Putting <code>req(input$file_input)</code> before the function that generated the download button and before the function that reads the data makes sure those things are only done after there is data.</p>
 </div>
 <div id="downloadhandler" class="section level3">
 <h3>downloadHandler()</h3>
@@ -93,6 +93,6 @@ tags:
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>This is almost the same a checking if the value is <code>NULL</code>. The difference is that is works for all inputs <code>shiny</code> uses. For example, a textInput that has not been filled out by the user has a value of “”, so that is evaluated to <code>FALSE</code><a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p>This is almost the same a checking if the value is <code>NULL</code>. The difference is that is works for all inputs <code>shiny</code> uses. For example, a textInput that has not been filled out by the user has a value of &quot;&quot;, so that is evaluated to <code>FALSE</code><a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>

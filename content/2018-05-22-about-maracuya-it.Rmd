@@ -9,35 +9,63 @@ This is a maracuya...
 
 ![...my favorite Colombian fruit.](/./2018-05-22-about-maracuya-it_files/1321324244_maracuya.jpg){width=20%}
 
-But Maracuya IT is my company for giving courses about R. I offer four courses at the moment:
+In 2016 I moved to Colombia where I learned to speak [spanish](https://www.youtube.com/watch?v=Raicuc2I2rM), to dance [bachata](https://www.youtube.com/watch?v=dfsSL8QRjrM), how to make [arepas](https://www.youtube.com/watch?v=AJu0gRFsBrs) and how to make a [jugo de maracuya](https://www.youtube.com/watch?v=Z8gBDmKg5HU).
+
+I also started giving classes about the R language, which I really enjoyed. Back in the Netherlands I continued giving the classes and extended the topics to other languages like `python` and `JavaScript`. 
+
+This website I use to write a small blog when I discover something interesting and to provide a small overview of the courses I give:
+
+# R
 
 1. **Basics** starting point if you have few or zero experience with R. The basic concepts are explained here. 
 
     * Exploring data using the `ggplot2` and `dplyr` packages
-    * Presenting the results using the `rmarkdown` package
+    * Presenting the results in a reproduceble way using the `rmarkdown` package
     * Transforming data to a tidy format using the `tidy` package
     * Make calculations with times and dates using the `lubridate` package
     * Reading data from a file into R using the `readr` package
     * Connect to a database using the `DBI` package
     * An introduction into statistical models, a linear model and logistic regression
  
-2. **ML** here more advanced techniques for modeling a dataset are explained.
+2. **ML** here more advanced techniques for modeling a data set are explained.
 
     * Cross validation 
     * Bootstrapping
     * Feature selection
     * Decision trees 
     * Random forests
+    * Unsupervised learning
  
 3. **Big Data** explanation of what is big data, hadoop MapReduce and spark and how to use it in combination with R. Introduction to the `sparklyr` package and cloudera virtual machines
 
 4. **Advanced** here more advanced R topics are explained
 
     * Functional programming using the `purrr` package
-    * Making interactive web pages using `shiny`
+    * Writing functions using tidy evaluation
+    * Making a R package
     * Scraping information from an internet page using the `rvest` package
+    * Combining R and python using `reticulate`
 
-This website will contain examples of what you can do with the knowledge obtained in these courses.
+5. **Shiny** making interactive web pages using the `shiny` package
+
+# python
+
+Basic training for people without too much experience
+
+  * Do efficient array operations using `NumPy`
+  * Analyse DataFrames using `Pandas`
+  * Explore data by making graphs using `Matplotlib`
+    
+# JavaScript
+
+From basics to more advanced topics, focusing more on the back-end part of a website
+
+  * How to make a website using JavaScript, HTML and CSS
+  * How to make a backend using `nodejs`
+  * How to connect your backand to a database using SQL or `MongoDB` 
+  * How to handle asynchronous using callbacks or promises
+  * How to test your website using `mocha`, `chai` and `sinon`
+  * How to use the Object Oriented Programming paradigme in JavaScript
 
 For more info you can mail me at `wfjvdham@gmail.com`
 
