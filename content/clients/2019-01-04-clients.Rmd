@@ -1,0 +1,26 @@
+---
+title: Clients
+slug: clients
+categories:
+  - R
+  - JavaScript
+  - Android
+tags:
+  - clients
+---
+
+<center>
+
+![BS Grupo](/clients/2019-01-04-clients_files/LOGO BS GRUPO.jpg){width=80%}
+
+![Green Choice](/clients/2019-01-04-clients_files/green.jpg){width=80%}
+
+![Spiral Train](/clients/2019-01-04-clients_files/spiraltrain-logo-270.png){width=80%}
+
+![DICA](/clients/2019-01-04-clients_files/dica.jpeg){width=80%}
+
+![Eduvision](/clients/2019-01-04-clients_files/eduvision.jpeg){width=80%}
+
+![Katz](/clients/2019-01-04-clients_files/katz.gif){width=80%}
+
+</center>

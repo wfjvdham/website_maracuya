@@ -8,7 +8,7 @@ theme = "hyde-hyde"
 ## Hugo Built-in Features
 disqusShortname = "maracuya-1"
 googleAnalytics = "UA-119902709-1"
-# enableRobotsTXT = true
+enableRobotsTXT = true
 
 ## Site Settings
 [params]
@@ -50,3 +50,8 @@ googleAnalytics = "UA-119902709-1"
     weight = 400
     identifier = "categories"
     url = "/categories/"
+[[menu.main]]
+    name = "Clients"
+    weight = 500
+    identifier = "clients"
+    url = "/clients/"

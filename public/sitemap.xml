@@ -49,6 +49,11 @@
   </url>
   
   <url>
+    <loc>/categories/android/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/animation/</loc>
     <lastmod>2018-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -63,6 +68,20 @@
   <url>
     <loc>/categories/</loc>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/clients/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/clients/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/clients/clients/</loc>
   </url>
   
   <url>
@@ -86,6 +105,11 @@
   <url>
     <loc>/categories/java/</loc>
     <lastmod>2018-06-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/javascript/</loc>
     <priority>0</priority>
   </url>
   
