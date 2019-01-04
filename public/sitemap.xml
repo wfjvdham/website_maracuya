@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/clients/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/rolling-average-over-different-time-periods/</loc>
     <lastmod>2018-08-22T00:00:00+00:00</lastmod>
   </url>
@@ -44,12 +49,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/android/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -68,20 +68,6 @@
   <url>
     <loc>/categories/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/clients/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/clients/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/clients/clients/</loc>
   </url>
   
   <url>
@@ -105,11 +91,6 @@
   <url>
     <loc>/categories/java/</loc>
     <lastmod>2018-06-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/javascript/</loc>
     <priority>0</priority>
   </url>
   
