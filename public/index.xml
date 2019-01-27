@@ -6,25 +6,10 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Clients</title>
-      <link>/clients/</link>
-      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/clients/</guid>
-      <description>  BS Grupo
- Green Choice
- Spiral Train
- DICA
- Eduvision
- Katz
-  </description>
-    </item>
     
     <item>
       <title>Rolling Average over Different Time Periods</title>
@@ -103,6 +88,21 @@ So if you are interested in making some Mojarras fritas (and you know a little S
 …my favorite Colombian fruit.
  In 2016 I moved to Colombia where I learned to speak spanish, to dance bachata, how to make arepas and how to make a jugo de maracuya.
 I also started giving classes about the R language, which I really enjoyed. Back in the Netherlands I continued giving the classes and extended the topics to other languages like python and JavaScript.</description>
+    </item>
+    
+    <item>
+      <title>Clients</title>
+      <link>/clients/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/clients/</guid>
+      <description>  BS Grupo
+ Green Choice
+ Spiral Train
+ DICA
+ Eduvision
+ Katz
+  </description>
     </item>
     
   </channel>
